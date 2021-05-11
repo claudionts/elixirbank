@@ -1,6 +1,6 @@
 defmodule Elixirbank.Repo.Migrations.CreateUserTable do
   @moduledoc """
-  Define Migration
+  Create users table migration
   """
   use Ecto.Migration
 

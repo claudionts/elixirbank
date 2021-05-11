@@ -1,4 +1,7 @@
 defmodule Elixirbank.MixProject do
+  @moduledoc """
+  Dependencies manager
+  """
   use Mix.Project
 
   def project do
@@ -45,7 +48,8 @@ defmodule Elixirbank.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:bcrypt_elixir, "~> 2.0"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:decimal, "~> 2.0"}
     ]
   end
 
