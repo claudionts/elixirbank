@@ -34,6 +34,9 @@ config :elixirbank, ElixirbankWeb.Guardian,
   issuer: "elixirbank_web",
   secret_key: "3mJn44Ht8alG7R4Cb1qQpfxIEqtIuA65tDav3FYxyvZslDnzMvCWegy7u5MVjrvA"
 
+config :elixirbank, ElixirbankWeb.AuthAccessPipeline,
+  module: ElixirbankWeb.Guardian,
+  error_handler: ElixirbankWeb.AuthErrorHandler
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

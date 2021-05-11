@@ -10,5 +10,10 @@ defmodule Elixirbank.Users.Create do
     |> Repo.insert()
   end
 
-  def get_user(id), do: Repo.get(User, id)
+  def get_user(id) do
+    case Repo.get(User, id) do
+      nil -> {:error, "Account, not found!"}
+      user -> {:ok, user}
+    end
+  end
 end

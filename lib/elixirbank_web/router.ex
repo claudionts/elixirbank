@@ -5,10 +5,20 @@ defmodule ElixirbankWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug :accepts, ["json"]
+    plug ElixirbankWeb.AuthAccessPipeline
+  end
+
   scope "/api", ElixirbankWeb do
     pipe_through :api
     post "/users", UsersController, :create
     post "/signin", UsersController, :sign_in
+  end
+
+  scope "/api", ElixirbankWeb do
+    pipe_through :api_auth
+    get "/user/:id", UsersController, :get_user
   end
 
   # Enables LiveDashboard only for development

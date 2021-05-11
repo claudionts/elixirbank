@@ -17,6 +17,11 @@ defmodule ElixirbankWeb.UsersController do
     end
   end
 
+  def get_user(conn, %{"id" => id}) do
+    Elixirbank.get_user(id)
+    |> handle_response(conn)
+  end
+
   def create(conn, params) do
     params
     |> Elixirbank.create_user()
