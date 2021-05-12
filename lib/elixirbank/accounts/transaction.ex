@@ -13,9 +13,9 @@ defmodule Elixirbank.Accounts.Transaction do
     deposit_params = build_params(to_id, value)
 
     Multi.new()
-    |> Multi.merge(fn _changes -> Operation.call(withdraw_params, :withdraw) end)
-    |> Multi.merge(fn _changes -> Operation.call(deposit_params, :deposit) end)
-    |> run_transaction()
+    |>Multi.merge(fn _changes -> Operation.call(withdraw_params, :withdraw) end)
+    |>Multi.merge(fn _changes -> Operation.call(deposit_params, :deposit) end)
+    |>run_transaction()
   end
 
   defp build_params(id, value) , do: %{"id" => id, "value" => value}

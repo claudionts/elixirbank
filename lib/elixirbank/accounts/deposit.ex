@@ -7,8 +7,8 @@ defmodule Elixirbank.Accounts.Deposit do
 
   def call(params) do
     params
-    |> Operation.call(:deposit)
-    |> run_transaction()
+    |>Operation.call(:deposit)
+    |>run_transaction()
   end
 
   defp run_transaction(multi) do

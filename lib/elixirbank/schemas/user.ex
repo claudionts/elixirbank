@@ -5,6 +5,7 @@ defmodule Elixirbank.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Elixirbank.Account
   alias Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -16,19 +17,20 @@ defmodule Elixirbank.User do
     field :nickname, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    has_one :account, Account
 
     timestamps()
   end
 
   def changeset(params) do
     %__MODULE__{}
-    |> cast(params, @required_params)
-    |> validate_required(@required_params)
-    |> validate_length(:password, min: 6)
-    |> validate_format(:email, ~r/@/)
-    |> unique_constraint([:email])
-    |> unique_constraint([:nickname])
-    |> put_password_hash()
+    |>cast(params, @required_params)
+    |>validate_required(@required_params)
+    |>validate_length(:password, min: 6)
+    |>validate_format(:email, ~r/@/)
+    |>unique_constraint([:email])
+    |>unique_constraint([:nickname])
+    |>put_password_hash()
   end
 
   defp put_password_hash(%Changeset{valid?: true, changes: %{password: password}} = changeset) do

@@ -3,8 +3,8 @@ defmodule ElixirbankWeb.FallbackController do
 
   def call(conn, {:error, result})  do
     conn
-    |> put_status(:bad_request)
-    |> put_view(ElixirbankWeb.ErrorView)
-    |> render("400.json", result: result)
+    |>put_status(:bad_request)
+    |>put_view(ElixirbankWeb.ErrorView)
+    |>render("400.json", result: result)
   end
 end

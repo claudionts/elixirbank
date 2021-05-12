@@ -11,7 +11,7 @@ defmodule ElixirbankWeb.AuthErrorHandler do
     body = Phoenix.json_library().encode!(%{message: to_string(type)})
 
     conn
-    |> put_resp_content_type("application/json")
-    |> send_resp(401, body)
+    |>put_resp_content_type("application/json")
+    |>send_resp(401, body)
   end
 end

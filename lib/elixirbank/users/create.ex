@@ -9,21 +9,21 @@ defmodule Elixirbank.Users.Create do
 
   def call(params) do
     Multi.new
-    |> Multi.insert(:create_user, User.changeset(params))
-    |> Multi.run(:create_account, fn repo, %{create_user: user} ->
+    |>Multi.insert(:create_user, User.changeset(params))
+    |>Multi.run(:create_account, fn repo, %{create_user: user} ->
       insert_account(repo, user)
     end)
-    |> Multi.run(:preload_data, fn repo, %{create_user: user} ->
+    |>Multi.run(:preload_data, fn repo, %{create_user: user} ->
       preload_data(repo, user)
     end)
-    |> run_transaction()
+    |>run_transaction()
 
   end
 
   defp insert_account(repo, user) do
     user.id
-    |> account_changeset
-    |> repo.insert
+    |>account_changeset
+    |>repo.insert
   end
 
   defp account_changeset(user_id), do: Account.changeset(%{user_id: user_id, balance: "1000.00"})
@@ -40,9 +40,9 @@ defmodule Elixirbank.Users.Create do
   end
 
   def get_user(id) do
-    case Repo.get(User, id) do
+    case Repo.get_by(User, id: id) do
       nil -> {:error, "Account, not found!"}
-      user -> {:ok, user}
+      user -> preload_data(Repo, user)
     end
   end
 end

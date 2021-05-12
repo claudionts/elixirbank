@@ -19,6 +19,9 @@ defmodule ElixirbankWeb.Router do
   scope "/api", ElixirbankWeb do
     pipe_through :api_auth
     get "/user/:id", UsersController, :get_user
+    post "/accounts/:id/deposit", AccountsController, :deposit
+    post "/accounts/:id/withdraw", AccountsController, :withdraw
+    post "/accounts/transaction", AccountsController, :transaction
   end
 
   # Enables LiveDashboard only for development
