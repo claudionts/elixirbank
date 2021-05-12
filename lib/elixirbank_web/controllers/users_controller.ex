@@ -6,6 +6,7 @@ defmodule ElixirbankWeb.UsersController do
 
   action_fallback ElixirbankWeb.FallbackController
 
+  @spec sign_in(Plug.Conn, %{email: String, password: String}) :: any()
   def sign_in(conn, %{"email" => email, "password" => password}) do
     case Auth.run(email, password) do
       {:ok, user} ->
@@ -19,6 +20,7 @@ defmodule ElixirbankWeb.UsersController do
     end
   end
 
+  @spec get_user(Plug.Conn, Integer) :: any()
   def get_user(conn, %{"id" => id}) do
     with {:ok, %User{} = user} <- Elixirbank.get_user(id) do
      conn
@@ -27,18 +29,21 @@ defmodule ElixirbankWeb.UsersController do
     end
   end
 
+  @spec create(Plug.Conn, %User{}) :: any()
   def create(conn, params) do
     params
     |>Elixirbank.create_user()
     |>handle_response(conn)
   end
 
+  @spec handle_response({Atom, %User{}}, Plug.Conn) :: any()
   defp handle_response({:ok, %User{} = user}, conn) do
     conn
     |>put_status(:created)
     |>render("create.json", user: user)
   end
 
+  @spec handle_response({Atom, String}, Plug.Conn) :: any()
   defp handle_response({:error, result}, conn) do
     conn
     |>put_status(:bad_request)

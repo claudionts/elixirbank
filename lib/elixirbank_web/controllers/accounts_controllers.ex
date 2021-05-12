@@ -6,6 +6,7 @@ defmodule ElixirbankWeb.AccountsController do
 
   action_fallback ElixirbankWeb.FallbackController
 
+  @spec withdraw(conn :: %Plug.Conn{}, params :: map()) :: any()
   def deposit(conn, params) do
     with {:ok, %Account{} = account} <- Elixirbank.deposit(params) do
       conn
@@ -14,6 +15,7 @@ defmodule ElixirbankWeb.AccountsController do
     end
   end
 
+  @spec withdraw(conn :: %Plug.Conn{}, params :: map()) :: any()
   def withdraw(conn, params) do
     with {:ok, %Account{} = account} <- Elixirbank.withdraw(params) do
       conn
@@ -22,6 +24,7 @@ defmodule ElixirbankWeb.AccountsController do
     end
   end
 
+  @spec withdraw(conn :: %Plug.Conn{}, params :: map()) :: any()
   def transaction(conn, params) do
     with {:ok, %TransactionResponse{} = transaction} <- Elixirbank.transaction(params) do
       conn
