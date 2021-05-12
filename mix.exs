@@ -55,7 +55,8 @@ defmodule Elixirbank.MixProject do
       {:bcrypt_elixir, "~> 2.0"},
       {:guardian, "~> 2.0"},
       {:decimal, "~> 2.0"},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:faker, "~> 0.13", only: :test}
     ]
   end
 
