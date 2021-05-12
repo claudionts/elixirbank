@@ -13,7 +13,12 @@ defmodule Elixirbank.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -49,7 +54,8 @@ defmodule Elixirbank.MixProject do
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:bcrypt_elixir, "~> 2.0"},
       {:guardian, "~> 2.0"},
-      {:decimal, "~> 2.0"}
+      {:decimal, "~> 2.0"},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
