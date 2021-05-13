@@ -1,4 +1,7 @@
 defmodule ElixirbankWeb.AccountsController do
+  @moduledoc """
+  Run accounts operations
+  """
   use ElixirbankWeb, :controller
 
   alias Elixirbank.Account
