@@ -6,7 +6,7 @@ defmodule ElixirbankWeb.UsersView do
       account: %Account{
         id: account_id,
         balance: balance
-        },
+      },
       id: id,
       name: name,
       nickname: nickname

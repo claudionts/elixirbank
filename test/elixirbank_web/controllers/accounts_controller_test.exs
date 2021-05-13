@@ -3,6 +3,7 @@ defmodule ElixirbankWeb.AccountsControllerTest do
   AccountsController test
   """
   use ElixirbankWeb.ConnCase
+
   alias ElixirbankWeb.Guardian
   alias Elixirbank.{User, Account}
 
