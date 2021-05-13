@@ -43,8 +43,8 @@ defmodule Elixirbank.Users.Create do
     end
   end
 
-  @spec get_user(Integer) :: {:error, String} | {:ok, user: %User{}}
-  def get_user(id) do
+  @spec get_user_id(Integer) :: {:error, String} | {:ok, user: %User{}}
+  def get_user_id(id) do
     case Repo.get_by(User, id: id) do
       nil -> {:error, "Account, not found!"}
       user -> preload_data(Repo, user)

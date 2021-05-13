@@ -12,7 +12,7 @@ defmodule Elixirbank do
   defdelegate create_user(params), to: UserCreate, as: :call
 
   @spec get_user(Integer) :: User.changeset
-  defdelegate get_user(params), to: UserCreate, as: :get_user
+  defdelegate get_user(params), to: UserCreate, as: :get_user_id
 
   @spec deposit(%{id: Ecto.UUID, value: Decimal}) :: {:error, String} | {:ok, %Account{}}
   defdelegate deposit(params), to: Deposit, as: :call

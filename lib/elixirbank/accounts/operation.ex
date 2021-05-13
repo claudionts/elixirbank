@@ -4,13 +4,13 @@ defmodule Elixirbank.Accounts.Operation do
   """
   alias Ecto.Multi
 
-  alias Elixirbank.{Account}
+  alias Elixirbank.{Account, User}
 
-  @spec call(%{id: Ecto.UUID, value: Decimal}, Atom) :: %Account{}
-  def call(%{"id" => id, "value" => value}, operation) do
+  @spec call(%{user_id: Ecto.UUID, value: Decimal}, Atom) :: %Account{}
+  def call(%{"id" => user_id, "value" => value}, operation) do
     operation_name = account_operation_name(operation)
     Multi.new()
-    |>Multi.run(operation_name, fn repo, _changes -> get_account(repo, id) end)
+    |>Multi.run(operation_name, fn repo, _changes -> get_account(repo, user_id) end)
     |>Multi.run(operation, fn repo, changes ->
       account = Map.get(changes, operation_name)
 
@@ -20,7 +20,7 @@ defmodule Elixirbank.Accounts.Operation do
 
   @spec get_account(Ecto.Repo, Integer) :: {:error, String} | {:ok, %Account{}}
   defp get_account(repo, id) do
-    case repo.get(Account, id) do
+    case repo.get_by(Account, [user_id: id]) do
       nil -> {:error, "Account, not found!"}
       account -> {:ok, account}
     end

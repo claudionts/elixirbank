@@ -3,6 +3,7 @@ defmodule ElixirbankWeb.UsersController do
 
   alias Elixirbank.{Auth, User}
   alias ElixirbankWeb.Guardian
+  alias ElixirbankWeb.Guardian.Plug, as: GuardianPlug
 
   action_fallback ElixirbankWeb.FallbackController
 
@@ -20,9 +21,9 @@ defmodule ElixirbankWeb.UsersController do
     end
   end
 
-  @spec get_user(Plug.Conn, Integer) :: any()
-  def get_user(conn, %{"id" => id}) do
-    with {:ok, %User{} = user} <- Elixirbank.get_user(id) do
+  @spec current_user(Plug.Conn, map) :: any()
+  def current_user(conn, _) do
+    with {:ok, %User{} = user} <- GuardianPlug.current_resource(conn) do
      conn
      |>put_status(:ok)
      |>render("create.json", user: user)

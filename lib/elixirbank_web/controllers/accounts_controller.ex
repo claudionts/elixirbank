@@ -4,13 +4,16 @@ defmodule ElixirbankWeb.AccountsController do
   """
   use ElixirbankWeb, :controller
 
-  alias Elixirbank.Account
+  alias Elixirbank.{Account, User}
   alias Elixirbank.Accounts.Transactions.Response, as: TransactionResponse
+  alias ElixirbankWeb.Guardian.Plug, as: GuardianPlug
 
   action_fallback ElixirbankWeb.FallbackController
 
-  @spec withdraw(%Plug.Conn{}, %{id: Ecto.UUID, value: Decimal}) :: any()
+  @spec deposit(%Plug.Conn{}, %{value: Decimal}) :: any()
   def deposit(conn, params) do
+    {:ok, %User{id: user_id}} = GuardianPlug.current_resource(conn)
+    params = Map.put(params, "id", user_id)
     with {:ok, %Account{} = account} <- Elixirbank.deposit(params) do
       conn
       |>put_status(:created)
@@ -18,8 +21,10 @@ defmodule ElixirbankWeb.AccountsController do
     end
   end
 
-  @spec withdraw(%Plug.Conn{}, %{id: Ecto.UUID, value: Decimal}) :: any()
+  @spec withdraw(%Plug.Conn{}, %{value: Decimal}) :: any()
   def withdraw(conn, params) do
+    {:ok, %User{id: user_id}} = GuardianPlug.current_resource(conn)
+    params = Map.put(params, "id", user_id)
     with {:ok, %Account{} = account} <- Elixirbank.withdraw(params) do
       conn
       |>put_status(:created)
@@ -27,8 +32,10 @@ defmodule ElixirbankWeb.AccountsController do
     end
   end
 
-  @spec withdraw(%Plug.Conn{}, %{from: Ecto.UUID, to: Ecto.UUID, value: Decimal}) :: any()
+  @spec withdraw(%Plug.Conn{}, %{to: Ecto.UUID, value: Decimal}) :: any()
   def transaction(conn, params) do
+    {:ok, %User{id: user_id}} = GuardianPlug.current_resource(conn)
+    params = Map.put(params, "from", user_id)
     with {:ok, %TransactionResponse{} = transaction} <- Elixirbank.transaction(params) do
       conn
       |>put_status(:created)

@@ -39,5 +39,19 @@ defmodule ElixirbankWeb.AccountsControllerTest do
                 "message" => "Ballance changed successfully"
               } = response
     end
+
+    test "when all params are valid, make the withdraw", %{conn: conn, account_id: account_id} do
+      params = %{id: account_id, value: Decimal.new("10.00")}
+
+      response =
+        conn
+        |>post(Routes.accounts_path(conn, :withdraw, account_id, params))
+        |>json_response(:created)
+      IO.puts(response)
+      assert  %{
+                "account" => %{"balance" => "1050.00", "id" => _id},
+                "message" => "Ballance changed successfully"
+              } = response
+    end
   end
 end

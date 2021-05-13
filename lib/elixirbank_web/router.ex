@@ -18,9 +18,9 @@ defmodule ElixirbankWeb.Router do
 
   scope "/api", ElixirbankWeb do
     pipe_through :api_auth
-    get "/user/:id", UsersController, :get_user
-    post "/accounts/:id/deposit", AccountsController, :deposit
-    post "/accounts/:id/withdraw", AccountsController, :withdraw
+    get "/users", UsersController, :current_user
+    post "/accounts/deposit", AccountsController, :deposit
+    post "/accounts/withdraw", AccountsController, :withdraw
     post "/accounts/transaction", AccountsController, :transaction
   end
 

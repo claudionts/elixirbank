@@ -12,7 +12,7 @@ defmodule ElixirbankWeb.Guardian do
 
   def resource_from_claims(claims) do
     id = claims["sub"]
-    resource = Users.get_user(id)
+    resource = Users.get_user_id(id)
     {:ok,  resource}
   end
 end
