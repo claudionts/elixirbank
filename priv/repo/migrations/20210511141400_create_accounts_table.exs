@@ -1,6 +1,6 @@
 defmodule Elixirbank.Repo.Migrations.CreateAccountsTable do
   @moduledoc """
-  Create accounts table migration
+  Create accounts table migrate
   """
   use Ecto.Migration
 
