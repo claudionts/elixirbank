@@ -7,6 +7,8 @@ Fill in connection data with Postgres at: /config/dev.exs and /config/test.exs
 $ mix deps.get       Install dependencies
 $ mix ecto.create    Create database
 $ mix ecto.migrate   Create migrations
+$ mix test           Run tests
+$ mix test --cover   Test coverage
 $ mix phx.server     Run api server
 ```
 ### - Docker
