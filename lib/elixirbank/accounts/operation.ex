@@ -4,7 +4,7 @@ defmodule Elixirbank.Accounts.Operation do
   """
   alias Ecto.Multi
 
-  alias Elixirbank.{Account, User}
+  alias Elixirbank.{Account}
 
   @spec call(%{user_id: Ecto.UUID, value: Decimal}, Atom) :: %Account{}
   def call(%{"id" => user_id, "value" => value}, operation) do

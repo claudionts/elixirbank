@@ -32,12 +32,14 @@ defmodule Elixirbank.Operations.Create do
     ))
   end
 
-  def build(%Operation{from_id: from_id, to_id: to_id, type: type, id: id}) do
+  @spec build(%Operation{}) :: %{}
+  def build(%Operation{from_id: from_id, to_id: to_id, type: type, id: id, value: value}) do
     %{
+      id: id,
       from_id: from_id,
       to_id: to_id,
       type: type,
-      id: id
+      value: value
     }
   end
 
