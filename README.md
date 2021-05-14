@@ -76,6 +76,7 @@ $ docker-compose up
  curl -X POST \
  http://localhost:4000/api/deposit \
  -H 'Content-Type: application/json' \
+ -H 'Authorization: Bearer JWT-TOKEN-HERE' \
  -H 'cache-control: no-cache' \
  -d '{
     "value": "700.00"
@@ -98,6 +99,7 @@ $ docker-compose up
  curl -X POST \
  http://localhost:4000/api/withdraw \
  -H 'Content-Type: application/json' \
+ -H 'Authorization: Bearer JWT-TOKEN-HERE' \
  -H 'cache-control: no-cache' \
  -d '{
     "value": "700.00"
@@ -120,6 +122,7 @@ $ docker-compose up
  curl -X POST \
  http://localhost:4000/api/transaction \
  -H 'Content-Type: application/json' \
+ -H 'Authorization: Bearer JWT-TOKEN-HERE' \
  -H 'cache-control: no-cache' \
  -d '{
     "to": "52cd0527-b950-4a10-9bcb-ab6d891c44b4",
@@ -150,6 +153,7 @@ $ docker-compose up
  curl -X GET \
  http://localhost:4000/api/extract \
  -H 'Content-Type: application/json' \
+ -H 'Authorization: Bearer JWT-TOKEN-HERE' \
  -H 'cache-control: no-cache'
 ```
 #### response
