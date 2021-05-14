@@ -22,7 +22,10 @@ defmodule Elixirbank do
 
   @spec transaction(%{from: Ecto.UUID, to: Ecto.UUID, value: Decimal}) :: {:error, String} | {:ok, TransactionResponse.t() }
   defdelegate transaction(params), to: Transaction, as: :call
-  
+
   @spec registry_operation(%{from_id: Ecto.UUID, to_id: Ecto.UUID, value: Decimal, type: String}) :: {:error, String} | {:ok, %Operation{} }
   defdelegate registry_operation(params), to: OperationCreate, as: :call
+
+  @spec extract(%User{}) :: any()
+  defdelegate extract(params), to: OperationCreate, as: :extract
 end

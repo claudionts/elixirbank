@@ -22,6 +22,7 @@ defmodule ElixirbankWeb.Router do
     post "/accounts/deposit", AccountsController, :deposit
     post "/accounts/withdraw", AccountsController, :withdraw
     post "/accounts/transaction", AccountsController, :transaction
+    get "/accounts/extract", OperationsController, :extract
   end
 
   # Enables LiveDashboard only for development

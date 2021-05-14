@@ -5,7 +5,7 @@ defmodule Elixirbank.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Elixirbank.Account
+  alias Elixirbank.{Account, Operation}
   alias Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -18,6 +18,7 @@ defmodule Elixirbank.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     has_one :account, Account
+    has_many :operation, {"operations", Operation}, foreign_key: :from_id
 
     timestamps()
   end

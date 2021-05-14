@@ -40,7 +40,7 @@ defmodule Elixirbank.Users.CreateTest do
 
     test "get user for id" do
       {:ok, %User{id: user_id}} = Create.call(@valid_params)
-      assert {:ok, %User{}} = Create.get_user(user_id)
+      assert {:ok, %User{}} = Create.get_user_id(user_id)
     end
   end
 end

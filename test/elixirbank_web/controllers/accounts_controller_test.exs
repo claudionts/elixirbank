@@ -26,12 +26,12 @@ defmodule ElixirbankWeb.AccountsControllerTest do
       {:ok, conn: conn, account_id: account_id}
     end
 
-    test "when all params are valid, make the deposit", %{conn: conn, account_id: account_id} do
+    test "when all params are valid, make the deposit", %{conn: conn} do
       params = %{"value" => "50.00"}
 
       response =
         conn
-        |>post(Routes.accounts_path(conn, :deposit, account_id, params))
+        |>post(Routes.accounts_path(conn, :deposit, params))
         |>json_response(:created)
 
       assert  %{
@@ -40,16 +40,15 @@ defmodule ElixirbankWeb.AccountsControllerTest do
               } = response
     end
 
-    test "when all params are valid, make the withdraw", %{conn: conn, account_id: account_id} do
-      params = %{id: account_id, value: Decimal.new("10.00")}
+    test "when all params are valid, make the withdraw", %{conn: conn} do
+      params = %{"value" => "10.00"}
 
       response =
         conn
-        |>post(Routes.accounts_path(conn, :withdraw, account_id, params))
+        |>post(Routes.accounts_path(conn, :withdraw, params))
         |>json_response(:created)
-      IO.puts(response)
       assert  %{
-                "account" => %{"balance" => "1050.00", "id" => _id},
+                "account" => %{"balance" => "990.00", "id" => _id},
                 "message" => "Ballance changed successfully"
               } = response
     end
