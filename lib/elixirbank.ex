@@ -28,4 +28,7 @@ defmodule Elixirbank do
 
   @spec extract(%User{}) :: any()
   defdelegate extract(params), to: OperationCreate, as: :extract
+
+  @spec backoffice() :: any()
+  defdelegate backoffice(), to: OperationCreate, as: :backoffice
 end

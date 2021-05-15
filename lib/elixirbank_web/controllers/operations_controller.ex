@@ -18,4 +18,13 @@ defmodule ElixirbankWeb.OperationsController do
       |>render("operation.json", user: user)
     end
   end
+
+  @spec backoffice(%Plug.Conn{}, %{}) :: any()
+  def backoffice(conn, _) do
+    with {:ok, params} <- Elixirbank.backoffice do
+      conn
+      |>put_status(:ok)
+      |>render("extract.json", params)
+    end
+  end
 end
