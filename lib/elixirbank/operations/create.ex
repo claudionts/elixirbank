@@ -57,7 +57,7 @@ defmodule Elixirbank.Operations.Create do
   @spec run_transaction(%Ecto.Multi{}) :: {:error, String} | {:ok, map}
   defp run_transaction(multi) do
     case Repo.transaction(multi) do
-      {:error, _} -> {:error, "Fail"}
+      {:error, _} -> {:error, "Backoffice error"}
       {:ok, params} -> {:ok, params}
     end
   end
@@ -65,7 +65,7 @@ defmodule Elixirbank.Operations.Create do
   @spec last_month(Ecto.Repo) :: any()
   defp last_month(repo) do
     case sum_query(repo, -30) do
-      {:error, _} -> {:error, "Fail"}
+      {:error, _} -> {:error, "Backoffice error"}
       [value] -> {:ok, value}
     end
   end
@@ -73,7 +73,7 @@ defmodule Elixirbank.Operations.Create do
   @spec last_year(Ecto.Repo) :: any()
   defp last_year(repo) do
     case sum_query(repo, -365) do
-      {:error, _} -> {:error, "Fail"}
+      {:error, _} -> {:error, "Backoffice error"}
       [value] -> {:ok, value}
     end
   end
@@ -81,7 +81,7 @@ defmodule Elixirbank.Operations.Create do
   @spec last_day(Ecto.Repo) :: any()
   defp last_day(repo) do
     case sum_query(repo, -1) do
-      {:error, _} -> {:error, "Fail"}
+      {:error, _} -> {:error, "Backoffice error"}
       [value] -> {:ok, value}
     end
   end

@@ -33,15 +33,18 @@ defmodule ElixirbankWeb.OperationsView do
     }
   end
 
-  def render("extract.json", %{
+  def render("backoffice.json", %{
     "last_month" => last_month,
     "last_year" => last_year,
     "last_day" => last_day
   }) do
     %{
-      last_month: last_month,
-      last_year: last_year,
-      last_day: last_day
+      message: "Backoffice Data",
+      backoffice: %{
+        last_month: last_month,
+        last_year: last_year,
+        last_day: last_day
+      }
     }
   end
 end

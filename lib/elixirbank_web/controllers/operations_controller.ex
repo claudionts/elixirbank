@@ -24,7 +24,7 @@ defmodule ElixirbankWeb.OperationsController do
     with {:ok, params} <- Elixirbank.backoffice do
       conn
       |>put_status(:ok)
-      |>render("extract.json", params)
+      |>render("backoffice.json", params)
     end
   end
 end
