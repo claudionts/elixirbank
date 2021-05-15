@@ -150,7 +150,7 @@ $ docker-compose up
 
 
 
-### Transaction Account
+### Extract Account
 ```
  curl -X GET \
  http://localhost:4000/api/extract \
@@ -198,4 +198,25 @@ $ docker-compose up
             ]
         }
     },
+```
+
+
+### Backoffice Details
+```
+ curl -X GET \
+ http://localhost:4000/api/backoffice \
+ -H 'Content-Type: application/json' \
+ -H 'Authorization: Bearer JWT-TOKEN-HERE' \
+ -H 'cache-control: no-cache'
+```
+#### response
+```
+{
+    "backoffice": {
+        "last_day": "141.00",
+        "last_month": "5881.00",
+        "last_year": "5881.00"
+    },
+    "message": "Backoffice Data"
+}
 ```
