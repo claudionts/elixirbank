@@ -34,7 +34,13 @@ defmodule Elixirbank.Operations.Create do
     ))
   end
 
-  @spec build(%Operation{}) :: %{}
+  @spec build(%Operation{}) :: %{
+    id: Ecto.UUID,
+    from_id: Ecto.UUID,
+    to_id: Ecto.UUID,
+    type: String.t,
+    value: Decimal
+  }
   def build(%Operation{from_id: from_id, to_id: to_id, type: type, id: id, value: value}) do
     %{
       id: id,
@@ -45,7 +51,7 @@ defmodule Elixirbank.Operations.Create do
     }
   end
 
-  @spec backoffice() :: any()
+  @spec backoffice() :: map()
   def backoffice() do
     Multi.new()
     |>Multi.run("last_month", fn repo, _changes -> last_month(repo) end)
@@ -62,7 +68,7 @@ defmodule Elixirbank.Operations.Create do
     end
   end
 
-  @spec last_month(Ecto.Repo) :: any()
+  @spec last_month(Ecto.Repo) :: {:error, String} | {:ok, Decimal}
   defp last_month(repo) do
     case sum_query(repo, -30) do
       {:error, _} -> {:error, "Backoffice error"}
@@ -70,7 +76,7 @@ defmodule Elixirbank.Operations.Create do
     end
   end
 
-  @spec last_year(Ecto.Repo) :: any()
+  @spec last_year(Ecto.Repo) :: {:error, String} | {:ok, Decimal}
   defp last_year(repo) do
     case sum_query(repo, -365) do
       {:error, _} -> {:error, "Backoffice error"}
@@ -78,7 +84,7 @@ defmodule Elixirbank.Operations.Create do
     end
   end
 
-  @spec last_day(Ecto.Repo) :: any()
+  @spec last_day(Ecto.Repo) :: {:error, String} | {:ok, Decimal}
   defp last_day(repo) do
     case sum_query(repo, -1) do
       {:error, _} -> {:error, "Backoffice error"}
